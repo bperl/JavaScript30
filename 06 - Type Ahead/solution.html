@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Type Ahead 👀</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <form class="search-form">
+    <input type="text" class="search" placeholder="City or State">
+    <ul class="suggestions">
+      <li>Filter for a city</li>
+      <li>or a state</li>
+    </ul>
+  </form>
+<script>
+  const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+
+  const cities = []
+  fetch(endpoint).then(res => res.json()).then(res => cities.push(...res))
+
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
+  function handleKeyUp() {
+    let res = cities.filter(aCity => aCity.city.toLowerCase().startsWith(this.value.toLowerCase()))
+
+    res = res.map(aCity =>{
+      return `<li><span class='h1'>${aCity.city}, ${aCity.state}</span><span class='population'>${numberWithCommas(aCity.population)}</span></li>`
+    })
+    suggestionList.innerHTML = res.join('')
+  }
+
+  document.querySelector('.search').addEventListener('keyup', handleKeyUp)
+  const suggestionList = document.querySelector('.suggestions')
+</script>
+  </body>
+</html>

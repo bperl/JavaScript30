@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Console Tricks!</title>
+</head>
+<body>
+
+  <p onClick="makeGreen()">×BREAK×DOWN×</p>
+
+  <script>
+    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+
+    function makeGreen() {
+      const p = document.querySelector('p');
+      p.style.color = '#BADA55';
+      p.style.fontSize = '50px';
+    }
+
+    // Regular
+    console.log('hi')
+
+    // Interpolated
+    console.log(`dog's age is ${dogs[0].age}`)
+
+    // Styled
+    console.log('%c Hello world', 'font-size: 24px; color:blue; background-color: red;')
+
+    // warning!
+    console.warn('what are you doing?')
+
+    // Error :|
+    console.error('something is wrong')
+
+    // Info
+    console.info('did you know...')
+
+    // Testing
+    console.assert(2 < 1, 'something has gone wrong')
+
+    // clearing
+    // console.clear()
+
+    // Viewing DOM Elements
+    const p = document.querySelector('p')
+    console.log(p)
+    console.dir(p)
+
+    // Grouping together
+    dogs.forEach((dog, i, arr) => {
+      console.group(`Dog #${i+1}`)
+      console.log(dog.name)
+      console.log(dog.age)
+      console.groupEnd()
+    })
+
+    // counting
+    console.count(dogs[0].name)
+    console.count(dogs[0].name)
+    console.count(dogs[1].name)
+    console.count(dogs[1].name)
+    console.count(dogs[1].name)
+
+    // timing
+    console.time('github fetch')
+    fetch('https://api.github.com/users/bperl')
+      .then(data => data.json())
+      .then(data => console.log(data))
+      .then(data => console.timeEnd('github fetch'))
+
+  </script>
+</body>
+</html>

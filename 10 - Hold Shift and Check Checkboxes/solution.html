@@ -97,8 +97,26 @@
       <p>Don't forget to tweet your result!</p>
     </div>
   </div>
+  <script>
+    let first;
+    let last;
+    const elements = Array.from(document.querySelectorAll('.inbox input[type="checkbox"]'));
 
-<script>
-</script>
+    function setFirst(e) {
+      first = e.target;
+    }
+
+    function setLast(e) {
+      last = e.target;
+      let between = false;
+      elements.forEach(element => {
+        if (element === first || element === last) between = !between;
+        if (between) element.checked = true;
+      })
+
+    }
+
+    elements.forEach(element => element.addEventListener('click', (e) => first && e.shiftKey ? setLast(e) : setFirst(e)));
+  </script>
 </body>
 </html>

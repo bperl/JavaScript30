@@ -1,10 +1,10 @@
-const timerDisplay = document.querySelector('.display__time-left');
-const endTime = document.querySelector('.display__end-time');
-const buttons = document.querySelectorAll('[data-time]');
+const timerDisplay = document.querySelector(".display__time-left");
+const endTime = document.querySelector(".display__end-time");
+const buttons = document.querySelectorAll("[data-time]");
 
 let countdown;
 
-timer = (seconds) => {
+timer = seconds => {
   // let newSeconds = seconds;
   // countdown = setInterval(() => {
   //   if (seconds < 0) {
@@ -19,7 +19,7 @@ timer = (seconds) => {
   // }, 1000)
   clearInterval(countdown);
   const now = Date.now(); // instead of (new Date()).getTime();
-  const finish = now + (seconds * 1000);
+  const finish = now + seconds * 1000;
   displayTimeLeft(seconds);
   displayEndTime(finish);
 
@@ -28,25 +28,29 @@ timer = (seconds) => {
     if (secondsLeft <= 0) {
       clearInterval(countdown);
     }
-     displayTimeLeft(secondsLeft);
+    displayTimeLeft(secondsLeft);
   }, 1000);
-}
+};
 
 function displayTimeLeft(secondsLeft) {
   const minutes = Math.floor(secondsLeft / 60);
   // const hours = minutes / 60;
-  const remainingSeconds = secondsLeft % 60
-  const display = `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+  const remainingSeconds = secondsLeft % 60;
+  const display = `${minutes}:${
+    remainingSeconds < 10 ? "0" : ""
+  }${remainingSeconds}`;
   timerDisplay.innerText = display;
   document.title = display;
-  console.log({minutes, remainingSeconds});
+  console.log({ minutes, remainingSeconds });
 }
 
 function displayEndTime(timestamp) {
   const end = new Date(timestamp);
   const hours = end.getHours();
   const minutes = end.getMinutes();
-  const display = `Be Back At ${hours > 12 ? hours - 12 : hours}:${minutes < 10 ? '0' : ''}${minutes}`;
+  const display = `Be Back At ${hours > 12 ? hours - 12 : hours}:${
+    minutes < 10 ? "0" : ""
+  }${minutes}`;
   endTime.textContent = display;
 }
 
@@ -72,7 +76,7 @@ function handleSubmit(e) {
 // }
 
 buttons.forEach(button => {
-  button.addEventListener('click', handleClick)
-})
+  button.addEventListener("click", handleClick);
+});
 
-document.customForm.addEventListener('submit', handleSubmit);  // Named element can be accessed like this
+document.customForm.addEventListener("submit", handleSubmit); // Named element can be accessed like this
